@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auditorium Booking System</title>
+    <style>
+        /* Add some basic styling for better visual appearance */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #bookingForm, #bookingStatus {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Auditorium Booking System</h1>
+
+    <!-- Form for booking a seat -->
+    <div id="bookingForm">
+        <h2>Book a Seat</h2>
+        <label for="rowInput">Row:</label>
+        <input type="number" id="rowInput" min="1" max="5" value="1">
+        <label for="seatInput">Seat:</label>
+        <input type="number" id="seatInput" min="1" max="10" value="1">
+        <button id="bookSeatButton">Book Seat</button>
+    </div>
+
+    <!-- Button to display booking status -->
+    <div id="bookingStatus">
+        <h2>Booking Status</h2>
+        <button id="showStatusButton">Show Booking Status</button>
+        <div id="statusOutput"></div>
+    </div>
+
+    <!-- Include the JavaScript file -->
+    <script src="auditoriumBooking.js"></script>
+</body>
+</html>

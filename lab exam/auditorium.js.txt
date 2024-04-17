@@ -1,0 +1,89 @@
+class Seat {
+    constructor(row, number) {
+        this.row = row;
+        this.number = number;
+        this.isBooked = false;
+    }
+
+    
+    book() {
+        if (!this.isBooked) {
+            this.isBooked = true;
+            return Seat ${this.row}${this.number} booked successfully.;
+        } else {
+            return Seat ${this.row}${this.number} is already booked.;
+        }
+    }
+
+    
+    isAvailable() {
+        return !this.isBooked;
+    }
+}class Auditorium {
+    constructor(rows, seatsPerRow) {
+        this.rows = rows;
+        this.seatsPerRow = seatsPerRow;
+        this.seats = this.initializeSeats();
+    }
+
+
+    initializeSeats() {
+        const seats = [];
+        for (let row = 1; row <= this.rows; row++) {
+            for (let number = 1; number <= this.seatsPerRow; number++) {
+                seats.push(new Seat(row, number));
+            }
+        }
+        return seats;
+    }
+    bookSeat(row, number) {
+        const seat = this.findSeat(row, number);
+        if (seat) {
+            return seat.book();
+        } else {
+            return Seat ${row}${number} not found.;
+        }
+    }
+    findSeat(row, number) {
+        return this.seats.find(seat => seat.row === row && seat.number === number);
+    }
+
+    // Method to check if a seat is available
+    isSeatAvailable(row, number) {
+        const seat = this.findSeat(row, number);
+        if (seat) {
+            return seat.isAvailable();
+        } else {
+            return false;
+        }
+    }
+
+    getBookingStatus() {
+        let status = "Booking Status:\n";
+        this.seats.forEach(seat => {
+            const seatStatus = seat.isBooked ? "Booked" : "Available";
+            status += Seat ${seat.row}${seat.number}: ${seatStatus}\n;
+        });
+        return status;
+    }
+}
+
+const auditorium = new Auditorium(5, 10);
+
+document.getElementById("bookSeatButton").addEventListener("click", () => {
+    const rowInput = parseInt(document.getElementById("rowInput").value);
+    const seatInput = parseInt(document.getElementById("seatInput").value);
+    
+    const result = auditorium.bookSeat(rowInput, seatInput);
+    alert(result);
+});
+
+
+document.getElementById("showStatusButton").addEventListener("click", () => {
+    const statusOutput = document.getElementById("statusOutput");
+
+    const status = auditorium.getBookingStatus();
+    
+
+    statusOutput.textContent = status;
+});
